@@ -5,7 +5,7 @@ from ..solution_03 import Solution0, Solution1
 
 
 def _test_solution(cls):
-    return cls().get_max_prime()
+    return cls.get_max_prime()
 
 
 def test_solution_0(benchmark):

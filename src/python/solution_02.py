@@ -15,7 +15,8 @@ class Solution0:
 
     MAX = 4000000
 
-    def fib_tail(self, n=100):
+    @staticmethod
+    def fib_tail(n=100):
         if n == 1:
             return 1
         elif n == 2:
@@ -30,12 +31,13 @@ class Solution0:
 
         return res
 
-    def sum_fib(self):
+    @staticmethod
+    def sum_fib():
         res = 0
         n = 1
         while True:
-            data = self.fib_tail(n)
-            if data > self.MAX:
+            data = Solution0.fib_tail(n)
+            if data > Solution0.MAX:
                 break
 
             if data % 2 == 0:
@@ -60,13 +62,14 @@ class Solution1:
 
     MAX = 4000000
 
-    def sum_fib(self):
+    @staticmethod
+    def sum_fib():
         res = 0
         x = 1
         y = 1
         while True:
             data = x + y
-            if data > self.MAX:
+            if data > Solution1.MAX:
                 break
 
             res += data
