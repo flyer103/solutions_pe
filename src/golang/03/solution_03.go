@@ -48,7 +48,8 @@ func method0(number int64) (res int64) {
 }
 
 func method1(number int64) (res int64) {
-	for i := int64(2); i <= number/2; i++ {
+	max := number / 2
+	for i := int64(2); i <= max; i++ {
 		if number%i == 0 {
 			number = number / i
 			if isPrime(number) {
