@@ -7,29 +7,9 @@ package main
 
 import (
 	"fmt"
-	"sort"
 	"strconv"
 	"strings"
 )
-
-var (
-	start = 100
-	end   = 999
-)
-
-type int64Arr []int64
-
-func (a int64Arr) Len() int {
-	return len(a)
-}
-
-func (a int64Arr) Less(i, j int) bool {
-	return a[i] < a[j]
-}
-
-func (a int64Arr) Swap(i, j int) {
-	a[i], a[j] = a[j], a[i]
-}
 
 func isPalindrome(num int64) bool {
 	numStr := strconv.FormatInt(num, 10)
@@ -53,25 +33,38 @@ func isPalindrome(num int64) bool {
 }
 
 func method0() int64 {
-	var numbers int64Arr
-	var total int
+	start := 100
+	end := 999
+
+	var maxNum int64
 	for i := start; i <= end; i++ {
 		for j := start; j <= end; j++ {
-			numbers = append(numbers, int64(i*j))
-			total += 1
-		}
-	}
-	sort.Sort(numbers)
-
-	for total--; total >= 0; total-- {
-		if isPalindrome(numbers[total]) {
-			return numbers[total]
+			product := int64(i * j)
+			if product > maxNum && isPalindrome(product) {
+				maxNum = product
+			}
 		}
 	}
 
-	return int64(-1)
+	return maxNum
+}
+
+func method1() int64 {
+	var maxNum int64
+
+	for i := 999; i >= 100; i-- {
+		for j := 990; j >= 100; j -= 11 {
+			product := int64(i * j)
+			if product > maxNum && isPalindrome(product) {
+				maxNum = product
+			}
+		}
+	}
+
+	return maxNum
 }
 
 func main() {
 	fmt.Println(method0())
+	fmt.Println(method1())
 }

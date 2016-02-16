@@ -5,42 +5,54 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 Answer: 906609
 """
 
-START = 100
-END = 999
-
 
 def is_palindrome(num):
-    num_str = str(num)
-    total = len(num_str)
-    if total % 2 == 0:
-        mid = int(total/2) - 1
-    else:
-        mid = int(total/2)
+    num = str(num)
+    if num == num[::-1]:
+        return True
 
-    i = 0
-    last = total - 1
-    for i in range(0, mid+1):
-        if num_str[i] != num_str[last-i]:
-            return False
-
-    return True
+    return False
 
 
 def method0():
-    numbers = []
-    total = 0
-    for i in range(START, END+1):
-        for j in range(START, END+1):
-            numbers.append(i*j)
-            total += 1
+    maxNum = 0
 
-    numbers = sorted(numbers)
-    for i in range(total-1, -1, -1):
-        if is_palindrome(numbers[i]):
-            return numbers[i]
+    start = 100
+    end = 999
 
-    return -1
+    for i in range(start, end+1):
+        for j in range(start, end+1):
+            product = i * j
+            if product > maxNum and is_palindrome(product):
+                maxNum = product
+
+    return maxNum
+
+
+def method1():
+    """
+    The palindrome can be written as:
+        abccba
+    Which then simpifies to:
+        100000a + 10000b + 1000c + 100c + 10b + a
+    And then:
+        100001a + 10010b + 1100c
+    Factoring out 11, you get:
+        11(9091a + 910b + 100c)
+    So the palindrome must be divisible by 11.
+    Seeing as 11 is prime, at least one of the numbers must be divisible by 11.
+    """
+    maxNum = 0
+
+    for i in range(999, 99, -1):
+        for j in range(990, 99, -11):
+            product = i * j
+            if product > maxNum and is_palindrome(product):
+                maxNum = product
+
+    return maxNum
 
 
 if __name__ == '__main__':
     print(method0())
+    print(method1())
