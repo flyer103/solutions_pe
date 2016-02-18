@@ -97,14 +97,9 @@ func lcm(a, b int) int {
 }
 
 func lcmm(start, end int) int {
-	var a []int
-	for i := start; i <= end; i++ {
-		a = append(a, i)
-	}
-
-	res := a[0]
-	for i := 1; i < len(a); i++ {
-		res = lcm(res, a[i])
+	res := start
+	for i := start + 1; i <= end; i++ {
+		res = lcm(res, i)
 	}
 
 	return res
