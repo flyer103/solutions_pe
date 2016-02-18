@@ -72,3 +72,45 @@ func BenchmarkGetSmallestNumber(b *testing.B) {
 		getSmallestNumber(1, 20)
 	}
 }
+
+func TestGcd(t *testing.T) {
+	const expected = 4
+	data := gcd(12, 8)
+	if data != expected {
+		t.Errorf("expected %d, but got %d\n", expected, data)
+	}
+}
+
+func BenchmarkGcd(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		gcd(12, 8)
+	}
+}
+
+func TestLcm(t *testing.T) {
+	const expected = 12
+	data := lcm(4, 6)
+	if data != expected {
+		t.Errorf("expected %d, but got %d\n", expected, data)
+	}
+}
+
+func BenchmarkLcm(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		lcm(4, 6)
+	}
+}
+
+func TestLcmm(t *testing.T) {
+	const expected = 232792560
+	data := lcmm(1, 20)
+	if data != expected {
+		t.Errorf("expected %d, but got %d\n", expected, data)
+	}
+}
+
+func BenchmarkLcmm(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		lcmm(1, 20)
+	}
+}

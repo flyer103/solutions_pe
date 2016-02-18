@@ -6,6 +6,7 @@ numbers from 1 to 20?
 Answer: 232792560
 """
 import math
+import functools
 
 
 def is_prime(num):
@@ -62,5 +63,24 @@ def get_smallest_number(start=1, end=20):
         multiplier += 1
 
 
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+
+    return a
+
+
+def lcm(a, b):
+    return a * b // gcd(a, b)
+
+
+def lcmm(*args):
+    """
+    http://stackoverflow.com/questions/147515/least-common-multiple-for-3-or-more-numbers
+    """
+    return functools.reduce(lcm, args)
+
+
 if __name__ == '__main__':
     print(get_smallest_number())
+    print(lcmm(*list(range(1, 21))))

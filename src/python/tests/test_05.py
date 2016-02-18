@@ -4,7 +4,8 @@
 from functools import partial
 
 from ..solution_05 import is_prime, get_all_primes, \
-    get_max_multiple, get_smallest_number
+    get_max_multiple, get_smallest_number, gcd, lcm, \
+    lcmm
 
 
 def test_is_prime():
@@ -38,5 +39,26 @@ def test_get_max_multile(benchmark):
 def test_get_smallest_number(benchmark):
     expected = 232792560
     res = benchmark(partial(get_smallest_number, 1, 20))
+
+    assert res == expected
+
+
+def test_gcd(benchmark):
+    expected = 4
+    res = benchmark(partial(gcd, 8, 12))
+
+    assert res == expected
+
+
+def test_lcm(benchmark):
+    expected = 12
+    res = benchmark(partial(lcm, 4, 6))
+
+    assert res == expected
+
+
+def test_lcmm(benchmark):
+    expected = 232792560
+    res = benchmark(partial(lcmm, *list(range(1, 21))))
 
     assert res == expected

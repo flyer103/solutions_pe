@@ -82,6 +82,35 @@ func getSmallestNumber(start, end int) int {
 	}
 }
 
+func gcd(a, b int) int {
+	for {
+		if b == 0 {
+			return a
+		}
+
+		a, b = b, a%b
+	}
+}
+
+func lcm(a, b int) int {
+	return a * b / gcd(a, b)
+}
+
+func lcmm(start, end int) int {
+	var a []int
+	for i := start; i <= end; i++ {
+		a = append(a, i)
+	}
+
+	res := a[0]
+	for i := 1; i < len(a); i++ {
+		res = lcm(res, a[i])
+	}
+
+	return res
+}
+
 func main() {
 	fmt.Println(getSmallestNumber(1, 20))
+	fmt.Println(lcmm(1, 20))
 }
